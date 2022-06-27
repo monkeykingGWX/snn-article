@@ -1,4 +1,4 @@
-package com.snn.domain;
+package com.snn.article.domain;
 
 import java.util.Date;
 

@@ -16,7 +16,7 @@
             <!--高版本的(8.0及以上版本） mysql-connector-java 需要设置 nullCatalogMeansCurrent=true-->
             <!--<property name="nullCatalogMeansCurrent" value="true"/>-->
         </jdbcConnection>
-        <javaModelGenerator  targetPackage="com.snn.domain" targetProject="src/main/java">
+        <javaModelGenerator  targetPackage="com.snn.article.domain" targetProject="src/main/java">
             <property name="enableSubPackages" value="false" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
@@ -25,7 +25,7 @@
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.mybatis.dao"
+                             targetPackage="com.snn.article.dao"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>

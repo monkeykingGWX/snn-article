@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snn.article.dao.AdminUserMapper">
+  <resultMap id="BaseResultMap" type="com.snn.article.domain.AdminUser">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="login_pass" jdbcType="CHAR" property="loginPass" />
+    <result column="pass_halt" jdbcType="VARCHAR" property="passHalt" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from admin_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.snn.article.domain.AdminUser">
+    insert into admin_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null and name.length != ''">`name`,</if>
+      <if test="loginName != null and loginName.length != ''">login_name,</if>
+      <if test="loginPass != null and loginPass.length != ''">login_pass,</if>
+      <if test="passHalt != null and passHalt.length != ''">pass_halt,</if>
+      <if test="lastLoginTime != null">last_login_time,</if>
+      <if test="lastLoginIp != null and lastLoginIp != ''">last_login_ip,</if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null and name.length != ''">#{name},</if>
+      <if test="loginName != null and loginName.length != ''">#{loginName},</if>
+      <if test="loginPass != null and loginPass.length != ''">#{loginPass},</if>
+      <if test="passHalt != null and passHalt.length != ''">#{passHalt},</if>
+      <if test="lastLoginTime != null">#{lastLoginTime},</if>
+      <if test="lastLoginIp != null and lastLoginIp != ''">#{lastLoginIp},</if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.snn.article.domain.AdminUser">
+    update admin_user
+    <set>
+      <if test="name != null and name.length != ''">`name`=#{name},</if>
+      <if test="loginName != null and loginName.length != ''">login_name=#{loginName},</if>
+      <if test="loginPass != null and loginPass.length != ''">login_pass=#{loginPass},</if>
+      <if test="passHalt != null and passHalt.length != ''">pass_halt=#{passHalt},</if>
+      <if test="lastLoginTime != null">last_login_time=#{lastLoginTime},</if>
+      <if test="lastLoginIp != null and lastLoginIp != ''">last_login_ip=#{lastLoginIp},</if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+  <sql id="columns">
+    select user_id, name, login_name, login_pass, pass_halt, last_login_time, last_login_ip
+    from admin_user
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <include refid="columns" />
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    <include refid="columns" />
+    from admin_user
+  </select>
+</mapper>

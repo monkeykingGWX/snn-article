@@ -1,7 +1,9 @@
-package com.mybatis.dao;
+package com.snn.article.dao;
 
-import com.snn.domain.AdminUser;
+import com.snn.article.domain.AdminUser;
+
 import java.util.List;
+
 
 public interface AdminUserMapper {
     int deleteByPrimaryKey(Long userId);
