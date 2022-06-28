@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head  th:fragment="common_head">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <title>后台-[[${title}]]</title>
+</head>
+
+
+<div th:fragment="common_nav_list" class="col-md-2 nav-list">
+    <ul>
+        <li><a th:href="@{/admin}" th:class="${nav == 'admin'} ? 'active' : ''">首页</a></li>
+        <li><a th:href="@{/admin/user}" th:class="${nav == 'adminUser'} ? 'active' : ''">管理员</a></li>
+        <li><a href="">文章分类</a></li>
+        <li><a href="">文章管理</a></li>
+        <li><a href="">站点信息</a></li>
+        <li><a href="">友情链接</a></li>
+    </ul>
+</div>

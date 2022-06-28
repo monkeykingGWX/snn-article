@@ -3,6 +3,8 @@ package com.snn.article.controller.admin;
 import com.snn.article.domain.AdminUser;
 import com.snn.article.service.IAdminUserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +24,7 @@ public class AdminUserController {
     private IAdminUserService adminUserService;
 
     @GetMapping()
-    public String list () {
+    public String list (@Validated Pageination pageination, ModelMap modelMap) {
         return "admin/user/list";
     }
 
@@ -32,25 +34,9 @@ public class AdminUserController {
     }
 
     @PostMapping("/create")
-    public String add (AdminUser user) {
-        // 参数校验
-        String name = user.getName();
-        String loginName = user.getLoginName();
-        String loginPass = user.getLoginPass();
-
-        if (name == null) {
-            throw new RuntimeException("用户昵称不得为空");
-        }
-
-        int nameLength = name.length();
-        if (nameLength < 2 || nameLength > 8) {
-            throw new RuntimeException("用户昵称长度在2到8个字符之间");
-        }
-
-        // ……loginName及loginPass的校验
-
+    public String add (@Validated AdminUser user, ModelMap modelMap) {
         adminUserService.createAdminUser(user);
-
+        modelMap.put("jumpUrl", "/admin/user/create");  // 操作成功跳转地址
         return "success";
     }
 

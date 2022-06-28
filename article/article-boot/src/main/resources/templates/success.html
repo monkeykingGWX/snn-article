@@ -1,24 +1,45 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>success</title>
-</head>
+    <title>操作成功</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- font files -->
+    <link href="http://fonts.googleapis.com/css?family=Wallpoet" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
+    <!-- /font files -->
+    <!-- css files -->
+    <link th:href="@{/css/success.css}" rel="stylesheet" type="text/css" media="all" />
+    <!-- /css files -->
 <body>
-    <h2>SUCCESS</h2>
-    <p>即将跳转……</p>
-<script>
-    var url = [[${url}]]
-    setTimeout(function () {
-        if (url) {
-            location.href=url;
-        } else {
-            history.back();
-        }
+<div class="w3layouts-bg">
+    <div class="agileits-content">
+        <h2><span>操</span><span>作</span><span>成</span><span>功</span></h2>
 
+    </div>
+    <div class="w3layouts-right">
+        <div class="w3ls-text">
+            <h3>SUCCESS</h3>
+            <h4 class="w3-agileits2">您的操作请求已完成</h4>
+            <p>系统将会在3秒内进行跳转 <a th:href="${jumpUrl}" style="color:#3397af">点击跳转</a></p>
+            <p class="copyright">Copyright &copy; 2022.作文大全 All rights reserved.</p>
+
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
+</div>
+<script>
+    var jumpUrl = "[[${jumpUrl}]]"
+
+    setTimeout(function () {
+        if (jumpUrl) {
+            location.href=jumpUrl;
+        } else {
+            history.back()
+        }
     }, 3000);
 </script>
 </body>
