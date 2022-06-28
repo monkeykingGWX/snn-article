@@ -1,0 +1,45 @@
+html,body,#admin {
+    height: 100%;
+}
+.nav-list{
+    height: 100%;
+    border-right:2px solid #ddd;
+    padding:50px 0 0 20px;
+}
+
+.nav-list li{
+    margin-top:15px;
+}
+.nav-list a{
+    color:#333;
+}
+.nav-list a.active{
+    color:#337ab7
+}
+
+.main{
+    padding:40px 15px 15px 15px;
+}
+
+.btn-act{margin-bottom:20px;}
+
+#pagination{
+    text-align: center;
+}
+
+#form{
+    padding:30px 0;
+}
+
+/*首页*/
+#index .bg-success{
+    text-align: center;
+    padding:5px 0;
+}
+#index .bg-info {
+    padding:5px;
+}
+
+#index .bg-info span{
+    margin-right: 15px;
+}

@@ -15,4 +15,6 @@ public interface AdminUserMapper {
     List<AdminUser> selectAll();
 
     int updateByPrimaryKey(AdminUser record);
+
+    AdminUser selectByLoginName (String loginName);
 }

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <title>后台-管理员</title>
+</head>
+<body>
+<div class="row" id="admin">
+    <div class="col-md-2 nav-list">
+        <ul>
+            <li><a th:href="@{/admin}" >首页</a></li>
+            <li><a th:href="@{/admin/user}" class="active">管理员</a></li>
+            <li><a href="">文章分类</a></li>
+            <li><a href="">文章管理</a></li>
+            <li><a href="">站点信息</a></li>
+            <li><a href="">友情链接</a></li>
+        </ul>
+    </div>
+    <div class="col-md-10">
+        <div class="main" id="user">
+            <div class="btn-act">
+                <a th:href="@{/admin/user/create}" class="btn btn-primary">新增</a>
+                <a href="" class="btn btn-danger">删除</a>
+            </div>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th><input type="checkbox"></th>
+                    <th>昵称</th>
+                    <th>账号</th>
+                    <th>最后登录时间</th>
+                    <th>最后登录IP</th>
+                    <th>操作</th>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>大圣</td>
+                    <td>king</td>
+                    <td>2022-12-12 11:11</td>
+                    <td>192.168.1.128</td>
+                    <td><a href="" class="btn btn-xs btn-warning">修改</a> <a href="" class="btn btn-xs  btn-danger">删除</a></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>大圣</td>
+                    <td>king</td>
+                    <td>2022-12-12 11:11</td>
+                    <td>192.168.1.128</td>
+                    <td><a href="" class="btn btn-xs btn-warning">修改</a> <a href="" class="btn btn-xs btn-danger">删除</a></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>大圣</td>
+                    <td>king</td>
+                    <td>2022-12-12 11:11</td>
+                    <td>192.168.1.128</td>
+                    <td><a href="" class="btn btn-xs btn-warning">修改</a> <a href="" class="btn btn-xs btn-danger">删除</a></td>
+                </tr>
+            </table>
+
+            <nav aria-label="Page navigation" id="pagination">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="active"><a href="#" >1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+</body>
+</html>

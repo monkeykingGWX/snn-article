@@ -57,6 +57,9 @@
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     <include refid="columns" />
-    from admin_user
+  </select>
+  <select id="selectByLoginName" resultMap="BaseResultMap">
+    <include refid="columns" />
+    where login_name=#{loginName}
   </select>
 </mapper>
