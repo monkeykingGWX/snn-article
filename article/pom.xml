@@ -19,6 +19,7 @@
         <java.version>1.8</java.version>
         <mybatis.spring.boot.starter.version>2.1.4</mybatis.spring.boot.starter.version>
         <druid.version>1.2.6</druid.version>
+        <pagehelper.spring.boot.starter>1.3.1</pagehelper.spring.boot.starter>
     </properties>
 
     <!--依赖声明-->
@@ -42,6 +43,11 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.spring.boot.starter}</version>
         </dependency>
     </dependencies>
     </dependencyManagement>

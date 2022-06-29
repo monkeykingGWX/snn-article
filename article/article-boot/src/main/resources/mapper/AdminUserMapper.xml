@@ -57,6 +57,7 @@
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     <include refid="columns" />
+    order by user_id desc
   </select>
   <select id="selectByLoginName" resultMap="BaseResultMap">
     <include refid="columns" />

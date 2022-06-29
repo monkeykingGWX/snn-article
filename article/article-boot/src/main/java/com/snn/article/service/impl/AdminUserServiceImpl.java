@@ -1,13 +1,19 @@
 package com.snn.article.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.snn.article.dao.AdminUserMapper;
 import com.snn.article.domain.AdminUser;
+import com.snn.article.domain.ChangeUserPassGroup;
+import com.snn.article.domain.Pageination;
 import com.snn.article.service.IAdminUserService;
 import com.snn.article.utils.IdUtils;
 import com.snn.article.utils.Md5Utils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -43,33 +49,66 @@ public class AdminUserServiceImpl implements IAdminUserService {
         return adminUserMapper.insert(user);
     }
 
-    // 修改管理员
+    // 修改管理员密码
     @Override
-    public int modifyAdminUser(AdminUser user) {
-        return 0;
+    public int changeUserPass(AdminUser user) {
+        Long userId = user.getUserId();
+
+        findByUserId(userId);  // 校验该条数据是否存在
+
+        String loginPass = user.getLoginPass();
+
+        // 密码加密
+        String halt      = getHalt();
+        String encrypt   = encrypt(loginPass, halt);
+
+        user = new AdminUser();
+        user.setUserId(userId);
+        user.setPassHalt(halt);
+        user.setLoginPass(encrypt);
+
+        return adminUserMapper.updateByPrimaryKey(user);
     }
 
     // 查询管理员列表
     @Override
-    public List<AdminUser> selectAdminUsers() {
-        return null;
+    public PageInfo<AdminUser> selectAdminUsers(Pageination pageination) {
+        Integer pageNum = pageination.getPageNum();
+        Integer pageSize = pageination.getPageSize();
+
+        PageHelper.startPage(pageNum, pageSize);
+        List<AdminUser> adminUsers = adminUserMapper.selectAll();
+        PageInfo<AdminUser> pageInfo = new PageInfo<>(adminUsers);
+
+        return pageInfo;
     }
 
     // 查管理员
     @Override
     public AdminUser findByUserId(Long userId) {
-        return null;
+        AdminUser adminUser = adminUserMapper.selectByPrimaryKey(userId);
+
+        if (adminUser == null) {
+            throw new RuntimeException("不存在此管理员信息");
+        }
+
+        return adminUser;
     }
 
     // 删除一个管理员
     @Override
     public int deleteOne(Long userId) {
-        return 0;
+        findByUserId(userId);  // 校验该条数据是否存在
+        return adminUserMapper.deleteByPrimaryKey(userId);
     }
 
     // 删除多个管理员
     @Override
     public int deleteByIds(List<Long> userIds) {
+        for (Long userId : userIds) {
+            adminUserMapper.deleteByPrimaryKey(userId);
+        }
+
         return 0;
     }
 

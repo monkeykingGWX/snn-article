@@ -1,8 +1,9 @@
 package com.snn.article.service;
 
+import com.github.pagehelper.PageInfo;
 import com.snn.article.domain.AdminUser;
+import com.snn.article.domain.Pageination;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -13,9 +14,9 @@ public interface IAdminUserService {
 
     int createAdminUser(AdminUser user);
 
-    int modifyAdminUser(AdminUser user);
+    int changeUserPass(AdminUser user);
 
-    List<AdminUser> selectAdminUsers();
+    PageInfo<AdminUser> selectAdminUsers(Pageination pageination);
 
     AdminUser findByUserId (Long userId);
 

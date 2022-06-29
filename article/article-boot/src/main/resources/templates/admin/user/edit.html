@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/common::common_head(title='管理员-修改密码')}"></head>
+<body>
+<form class="form-horizontal" id="form" method="post" th:action="@{/admin/user/changePass}">
+    <input type="hidden" name="userId" th:value="${userId}">
+    <div class="form-group">
+        <label for="loginPass" class="col-sm-2 control-label">登录密码</label>
+        <div class="col-sm-9">
+            <input type="password" class="form-control" id="loginPass" name="loginPass" placeholder="6~12个字符之间" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">修改密码</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

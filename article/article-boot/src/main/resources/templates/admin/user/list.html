@@ -7,66 +7,109 @@
     <div class="col-md-10">
         <div class="main" id="user">
             <div class="btn-act">
-                <a th:href="@{/admin/user/create}" class="btn btn-primary">新增</a>
-                <a href="" class="btn btn-danger">删除</a>
+                <a th:href="@{/admin/user/create}" class="btn btn-primary" target="_blank">新增</a>
+                <a th:href="@{/admin/user/removeSome}" class="btn btn-danger removeSome" target="_blank">删除</a>
             </div>
 
             <table class="table table-bordered table-hover">
                 <tr>
-                    <th><input type="checkbox"></th>
+                    <th><input type="checkbox" class="check-all"></th>
                     <th>昵称</th>
                     <th>账号</th>
                     <th>最后登录时间</th>
                     <th>最后登录IP</th>
                     <th>操作</th>
                 </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>大圣</td>
-                    <td>king</td>
-                    <td>2022-12-12 11:11</td>
-                    <td>192.168.1.128</td>
-                    <td><a href="" class="btn btn-xs btn-warning">修改</a> <a href="" class="btn btn-xs  btn-danger">删除</a></td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>大圣</td>
-                    <td>king</td>
-                    <td>2022-12-12 11:11</td>
-                    <td>192.168.1.128</td>
-                    <td><a href="" class="btn btn-xs btn-warning">修改</a> <a href="" class="btn btn-xs btn-danger">删除</a></td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>大圣</td>
-                    <td>king</td>
-                    <td>2022-12-12 11:11</td>
-                    <td>192.168.1.128</td>
-                    <td><a href="" class="btn btn-xs btn-warning">修改</a> <a href="" class="btn btn-xs btn-danger">删除</a></td>
+                <tr th:each="user:${pageInfo.list}">
+                    <td><input type="checkbox" th:data-id="${user.userId}" class="check-del"></td>
+                    <td th:text="${user.name}">大圣</td>
+                    <td th:text="${user.loginName}">king</td>
+                    <td th:text="${user.lastLoginTime} ? ${#dates.format(user.lastLoginTime,'yyyy-MM-dd HH:mm')} : '暂未登录'">2022-12-12 11:11</td>
+                    <td th:text="${user.lastLoginIp} and  ${#strings.length(user.lastLoginIp) > 0}? ${user.lastLoginIp} : '暂未登录'">192.168.1.128</td>
+                    <td><a th:href="@{/admin/user/changePass/} + ${user.userId}" class="btn btn-xs btn-warning"  target="_blank">修改密码</a>
+                        <a th:href="@{/admin/user/removeOne/}+${user.userId}" target="_blank" class="btn btn-xs  btn-danger removeOne">删除</a></td>
                 </tr>
             </table>
 
             <nav aria-label="Page navigation" id="pagination">
                 <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
+                    <li th:class="${pageInfo.hasPreviousPage} ? '' : 'disabled'">
+                        <a th:if="${pageInfo.hasPreviousPage}" th:href="@{/admin/user?pageNum=}+${pageInfo.prePage}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
+                        <span th:if="!${pageInfo.hasPreviousPage}">
+                             <span aria-hidden="true">&laquo;</span>
+                        </span>
                     </li>
-                    <li class="active"><a href="#" >1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
+
+                    <li th:each="page:${pageInfo.navigatepageNums}" th:class="${pageInfo.pageNum == page} ? 'active'"><a th:href="@{/admin/user?pageNum=}+${page}" th:text="${page}">1</a></li>
+
+                    <li th:class="${pageInfo.hasNextPage} ? '' : 'disabled'">
+                        <a th:if="${pageInfo.hasNextPage}" th:href="@{/admin/user?pageNum=}+${pageInfo.nextPage}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
+                        <span th:if="!${pageInfo.hasNextPage}">
+                             <span aria-hidden="true">&raquo;</span>
+                        </span>
                     </li>
                 </ul>
             </nav>
         </div>
     </div>
 </div>
+
+<script th:src="@{/js/jquery_3.6.0.min.js}"></script>
+<script>
+    $(".removeOne").click(function () {
+        return window.confirm("确定删除该条数据吗？");
+    });
+
+    // 全选/全不选
+    $('.check-all').click(function(){
+        //判断当前全选框是否选中，如果选中则全选，否则全不选
+        if($(this).prop('checked')){
+            $('input[type="checkbox"]').prop('checked',true);
+        }else{
+            $('input[type="checkbox"]').prop('checked',false);
+
+        }
+    });
+
+    $(".check-del").click(function () {
+        allLen = $(".check-del").length;
+        checkedLen = $(".check-del:checked").length;
+
+        if (allLen == checkedLen) {
+            $('.check-all').prop("checked", true);
+        } else {
+            $('.check-all').prop("checked", false);
+        }
+    });
+
+    // 删除多个
+    $(".removeSome").click(function () {
+        if (window.confirm("确定删除该条数据吗？")) {
+            var ids = '';
+            $(".check-del").each(function (i) {
+                if ($(this).prop("checked")) {
+                    ids += $(this).attr("data-id") + ',';
+                }
+            });
+
+            if (!ids) {
+                return false;
+            }
+
+            ids = ids.substr(0, ids.length - 1);
+
+            var href = $(".removeSome").attr("href");
+            href += '?ids=' + ids;
+            $(".removeSome").attr("href", href);
+        } else {
+            return false;
+        }
+
+    })
+</script>
 </body>
 </html>
