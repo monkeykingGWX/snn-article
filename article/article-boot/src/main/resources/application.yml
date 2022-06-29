@@ -13,3 +13,4 @@ mybatis:
 logging:
   level:
     com.snn.article.dao: debug # 可以在日志中看到sql语句
+
