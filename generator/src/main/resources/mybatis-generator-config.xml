@@ -29,6 +29,6 @@
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
-        <table tableName="admin_user"></table>
+        <table tableName="web_info"></table>
     </context>
 </generatorConfiguration>

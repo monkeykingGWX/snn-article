@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/common::common_head(title='站点信息')}"></head>
+<body>
+<div class="row" id="admin">
+    <div class="col-md-2 nav-list" th:replace="~{admin/common::common_nav_list(nav='webinfo')}"></div>
+    <div class="col-md-10">
+        <div class="main" id="webinfo">
+            <form class="form-horizontal" id="form" method="post" th:action="@{/admin/webinfo/save}">
+                <input th:if="${webInfo}" type="hidden" name="webId" th:value="${webInfo.webId}" />
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">站点标题</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="title" name="title" th:value="${webInfo} ? ${webInfo.title}"  required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="keyword" class="col-sm-2 control-label">关键字</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="keyword" name="keyword" th:value="${webInfo} ? ${webInfo.keyword}" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">描述</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="description" name="description" th:value="${webInfo} ? ${webInfo.description}"  required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bottom" class="col-sm-2 control-label">网站底部信息</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" id="bottom" name="bottom" th:text="${webInfo} ? ${webInfo.bottom}"   required></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

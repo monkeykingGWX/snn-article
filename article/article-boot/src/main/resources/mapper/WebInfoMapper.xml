@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snn.article.dao.WebInfoMapper">
+  <resultMap id="BaseResultMap" type="com.snn.article.domain.WebInfo">
+    <id column="web_id" jdbcType="BIGINT" property="webId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="bottom" jdbcType="VARCHAR" property="bottom" />
+  </resultMap>
+
+
+  <insert id="insert" parameterType="com.snn.article.domain.WebInfo">
+    insert into web_info (title, keyword,
+      description, bottom)
+    values (#{title,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR}, #{bottom,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.snn.article.domain.WebInfo">
+    update web_info
+    set title = #{title,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      bottom = #{bottom,jdbcType=VARCHAR}
+    where web_id = #{webId,jdbcType=BIGINT}
+  </update>
+  <select id="selectOne"  resultMap="BaseResultMap">
+    select web_id, title, keyword, description, bottom
+    from web_info limit 1
+  </select>
+
+</mapper>
