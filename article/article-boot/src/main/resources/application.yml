@@ -8,9 +8,10 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   thymeleaf:
     cache: false
+  session:
+    timeout: 1800 # 单位秒
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml  # mapper映射文件路径
 logging:
   level:
     com.snn.article.dao: debug # 可以在日志中看到sql语句
-

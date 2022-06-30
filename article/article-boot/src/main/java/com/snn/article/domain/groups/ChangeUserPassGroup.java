@@ -1,4 +1,4 @@
-package com.snn.article.domain;
+package com.snn.article.domain.groups;
 
 /**
  * @author Gwx@704835519@qq.com

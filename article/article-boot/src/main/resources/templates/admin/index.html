@@ -6,12 +6,12 @@
         <div class="col-md-2 nav-list" th:replace="~{admin/common::common_nav_list(nav='admin')}"></div>
         <div class="col-md-10">
             <div class="main" id="index">
-                <p class="bg-success">欢迎您 <strong>大圣</strong></p>
-                <p class="bg-info"><span>上次登录时间：2022/12/12 12:12</span>IP：142.23.42.13</p>
+                <p class="bg-success">欢迎您 <strong th:text="${admin.name}">大圣</strong></p>
+                <p class="bg-info"><span>上次登录时间：[[${#dates.format(admin.lastLoginTime,'yyyy-MM-dd HH:mm')}]]</span>IP：[[${admin.lastLoginIp}]]</p>
                 
                 <div class="btn-grp">
                     <a class="btn btn-success">修改密码</a>
-                    <a class="btn btn-warning">退出登录</a>
+                    <a class="btn btn-warning" th:href="@{/admin/logout}">退出登录</a>
                 </div>
             </div>
         </div>

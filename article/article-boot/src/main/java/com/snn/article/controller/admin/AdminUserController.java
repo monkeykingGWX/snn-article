@@ -2,8 +2,9 @@ package com.snn.article.controller.admin;
 
 import com.github.pagehelper.PageInfo;
 import com.snn.article.domain.AdminUser;
-import com.snn.article.domain.ChangeUserPassGroup;
+import com.snn.article.domain.groups.ChangeUserPassGroup;
 import com.snn.article.domain.Pageination;
+import com.snn.article.domain.groups.UserAddGroup;
 import com.snn.article.service.IAdminUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -42,7 +43,7 @@ public class AdminUserController {
     }
 
     @PostMapping("/create")
-    public String add (@Validated AdminUser user, ModelMap modelMap) {
+    public String add (@Validated(UserAddGroup.class) AdminUser user, ModelMap modelMap) {
         adminUserService.createAdminUser(user);
         modelMap.put("jumpUrl", "/admin/user/create");  // 操作成功跳转地址
         return "success";

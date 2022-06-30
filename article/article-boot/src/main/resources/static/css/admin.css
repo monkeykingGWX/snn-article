@@ -43,3 +43,13 @@ html,body,#admin {
 #index .bg-info span{
     margin-right: 15px;
 }
+
+/* 登录页 */
+#login {
+    position: absolute;
+    left:50%;
+    top:10%;
+    width:200px;
+    padding:50px 0 0 0;
+    margin-left:-100px;
+}

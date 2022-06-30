@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.snn.article.domain.AdminUser;
 import com.snn.article.domain.Pageination;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -23,4 +24,6 @@ public interface IAdminUserService {
     int deleteOne (Long userId);
 
     int deleteByIds (List<Long> userIds);
+
+    void login (HttpServletRequest request, AdminUser adminUser);
 }

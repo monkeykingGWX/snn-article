@@ -4,16 +4,24 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.snn.article.dao.AdminUserMapper;
 import com.snn.article.domain.AdminUser;
-import com.snn.article.domain.ChangeUserPassGroup;
 import com.snn.article.domain.Pageination;
+import com.snn.article.domain.groups.ChangeUserPassGroup;
+import com.snn.article.domain.groups.LoginUserGroup;
+import com.snn.article.domain.groups.UserAddGroup;
 import com.snn.article.service.IAdminUserService;
 import com.snn.article.utils.IdUtils;
+import com.snn.article.utils.IpUtils;
 import com.snn.article.utils.Md5Utils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -110,6 +118,39 @@ public class AdminUserServiceImpl implements IAdminUserService {
         }
 
         return 0;
+    }
+
+    // 登录
+    @Override
+    public void login(HttpServletRequest request, AdminUser adminUser) {
+        String loginName = adminUser.getLoginName();
+        String loginPass = adminUser.getLoginPass();
+
+        // 账号校验
+        AdminUser exists = adminUserMapper.selectByLoginName(loginName);
+        if (exists == null) {
+            throw new RuntimeException("该登录账号不存在");
+        }
+
+        // 密码校验
+        String passHalt = exists.getPassHalt();
+        String encrypt = exists.getLoginPass();
+        loginPass = encrypt(loginPass, passHalt);
+
+        if (!encrypt.equals(loginPass)) {
+            throw new RuntimeException("密码输入错误");
+        }
+
+        // 成功登录后操作
+        HttpSession session = request.getSession();
+        Long userId = exists.getUserId();
+        session.setAttribute("admin", userId);
+
+        adminUser = new AdminUser();
+        adminUser.setUserId(userId);
+        adminUser.setLastLoginIp(IpUtils.getIpAddr(request));
+        adminUser.setLastLoginTime(new Date());
+        adminUserMapper.updateByPrimaryKey(adminUser);
     }
 
 
