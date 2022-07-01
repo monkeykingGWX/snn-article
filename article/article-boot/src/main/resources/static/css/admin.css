@@ -21,7 +21,12 @@ html,body,#admin {
     padding:40px 15px 15px 15px;
 }
 
+.red{color:red}
 .btn-act{margin-bottom:20px;}
+
+#form-search{margin-bottom:20px;}
+#form-search .form-control{margin-right:5px}
+.orderby{width:60px;padding:2px 3px;height: 20px;}
 
 #pagination{
     text-align: center;

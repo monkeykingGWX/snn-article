@@ -18,6 +18,31 @@
         <li><a href="">文章分类</a></li>
         <li><a href="">文章管理</a></li>
         <li><a th:href="@{/admin/webinfo}" th:class="${nav == 'webinfo'} ? 'active' : ''">站点信息</a></li>
-        <li><a th:href="@{/admin/friend}" th:class="${nav == 'friend'} ? 'active' : ''>友情链接</a></li>
+        <li><a th:href="@{/admin/friend}" th:class="${nav == 'friend'} ? 'active' : ''">友情链接</a></li>
     </ul>
 </div>
+
+<!--分页组件-->
+<nav aria-label="Page navigation" id="pagination" th:fragment="pagination">
+    <ul class="pagination">
+        <li th:class="${pageInfo.hasPreviousPage} ? '' : 'disabled'">
+            <a th:if="${pageInfo.hasPreviousPage}" th:href="${baseLink}+${pageInfo.prePage}+${searchQuery}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            <span th:if="!${pageInfo.hasPreviousPage}">
+                 <span aria-hidden="true">&laquo;</span>
+            </span>
+        </li>
+
+        <li th:each="page:${pageInfo.navigatepageNums}" th:class="${pageInfo.pageNum == page} ? 'active'"><a th:href="${baseLink}+${page}+${searchQuery}" th:text="${page}">1</a></li>
+
+        <li th:class="${pageInfo.hasNextPage} ? '' : 'disabled'">
+            <a th:if="${pageInfo.hasNextPage}" th:href="${baseLink}+${pageInfo.nextPage}+${searchQuery}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+            <span th:if="!${pageInfo.hasNextPage}">
+                 <span aria-hidden="true">&raquo;</span>
+            </span>
+        </li>
+    </ul>
+</nav>

@@ -8,7 +8,7 @@
         <div class="main" id="user">
             <div class="btn-act">
                 <a th:href="@{/admin/user/create}" class="btn btn-primary" target="_blank">新增</a>
-                <a th:href="@{/admin/user/removeSome}" class="btn btn-danger removeSome" target="_blank">删除</a>
+                <a th:data-href="@{/admin/user/removeSome}" class="btn btn-danger removeSome" target="_blank">删除</a>
             </div>
 
             <table class="table table-bordered table-hover">
@@ -31,85 +31,12 @@
                 </tr>
             </table>
 
-            <nav aria-label="Page navigation" id="pagination">
-                <ul class="pagination">
-                    <li th:class="${pageInfo.hasPreviousPage} ? '' : 'disabled'">
-                        <a th:if="${pageInfo.hasPreviousPage}" th:href="@{/admin/user?pageNum=}+${pageInfo.prePage}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                        <span th:if="!${pageInfo.hasPreviousPage}">
-                             <span aria-hidden="true">&laquo;</span>
-                        </span>
-                    </li>
-
-                    <li th:each="page:${pageInfo.navigatepageNums}" th:class="${pageInfo.pageNum == page} ? 'active'"><a th:href="@{/admin/user?pageNum=}+${page}" th:text="${page}">1</a></li>
-
-                    <li th:class="${pageInfo.hasNextPage} ? '' : 'disabled'">
-                        <a th:if="${pageInfo.hasNextPage}" th:href="@{/admin/user?pageNum=}+${pageInfo.nextPage}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                        <span th:if="!${pageInfo.hasNextPage}">
-                             <span aria-hidden="true">&raquo;</span>
-                        </span>
-                    </li>
-                </ul>
-            </nav>
+            <nav aria-label="Page navigation" id="pagination" th:replace="~{admin/common::pagination(pageInfo=${pageInfo}, baseLink='/admin/user?pageNum=', searchQuery='')}">
         </div>
     </div>
 </div>
 
 <script th:src="@{/js/jquery_3.6.0.min.js}"></script>
-<script>
-    $(".removeOne").click(function () {
-        return window.confirm("确定删除该条数据吗？");
-    });
-
-    // 全选/全不选
-    $('.check-all').click(function(){
-        //判断当前全选框是否选中，如果选中则全选，否则全不选
-        if($(this).prop('checked')){
-            $('input[type="checkbox"]').prop('checked',true);
-        }else{
-            $('input[type="checkbox"]').prop('checked',false);
-
-        }
-    });
-
-    $(".check-del").click(function () {
-        allLen = $(".check-del").length;
-        checkedLen = $(".check-del:checked").length;
-
-        if (allLen == checkedLen) {
-            $('.check-all').prop("checked", true);
-        } else {
-            $('.check-all').prop("checked", false);
-        }
-    });
-
-    // 删除多个
-    $(".removeSome").click(function () {
-        if (window.confirm("确定删除该条数据吗？")) {
-            var ids = '';
-            $(".check-del").each(function (i) {
-                if ($(this).prop("checked")) {
-                    ids += $(this).attr("data-id") + ',';
-                }
-            });
-
-            if (!ids) {
-                return false;
-            }
-
-            ids = ids.substr(0, ids.length - 1);
-
-            var href = $(".removeSome").attr("href");
-            href += '?ids=' + ids;
-            $(".removeSome").attr("href", href);
-        } else {
-            return false;
-        }
-
-    })
-</script>
+<script th:src="@{/js/admin.js}" ></script>
 </body>
 </html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snn.article.dao.FriendLinkMapper">
+  <resultMap id="BaseResultMap" type="com.snn.article.domain.FriendLink">
+    <id column="link_id" jdbcType="BIGINT" property="linkId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="orderby" jdbcType="INTEGER" property="orderby" />
+    <result column="is_show" jdbcType="BIT" property="isShow" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from friend_link
+    where link_id = #{linkId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.snn.article.domain.FriendLink">
+    insert into friend_link (link_id, name, link, 
+      orderby, is_show, start_time, 
+      end_time)
+    values (#{linkId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, 
+      #{orderby,jdbcType=INTEGER}, #{isShow,jdbcType=BIT}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.snn.article.domain.FriendLink">
+    update friend_link
+    set name = #{name,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      orderby = #{orderby,jdbcType=INTEGER},
+      is_show = #{isShow,jdbcType=BIT},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP}
+    where link_id = #{linkId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select link_id, name, link, orderby, is_show, start_time, end_time
+    from friend_link
+    where link_id = #{linkId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select link_id, name, link, orderby, is_show, start_time, end_time
+    from friend_link
+  </select>
+</mapper>

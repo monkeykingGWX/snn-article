@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/common::common_head(title='友情链接-修改')}"></head>
+<body>
+<form class="form-horizontal" id="form" method="post" th:action="@{/admin/friend/edit}">
+    <input type="hidden" name="linkId" th:value="${link.linkId}">
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">网站名 <span class="red">*</span></label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="name" name="name" th:value="${link.name}"  required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="link" class="col-sm-2 control-label">链接地址 <span class="red">*</span></label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="link" name="link" th:value="${link.link}" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="col-sm-2 control-label">是否显示 <span class="red">*</span></label>
+        <div class="col-sm-9">
+            <label class="radio-inline">
+                <input type="radio" name="isShow"  value="1" th:checked="${link.isShow == 1}"> 是
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="isShow" value="0" th:checked="${link.isShow == 0}"> 否
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="orderby" class="col-sm-2 control-label">排序值</label>
+        <div class="col-sm-9">
+            <input type="number" class="form-control" id="orderby" name="orderby" th:value="${link.orderby}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">显示日期 <span class="red">*</span></label>
+        <div class="col-sm-9"  id="date">
+            <input type="text"  autocomplete="off" id="startTime" name="startTime"  placeholder="开始日期" th:value="${#dates.format(link.startTime, 'yyyy-MM-dd HH:mm')}" readonly  required/> ~
+            <input type="text" autocomplete="off" id="endTime" name="endTime"  placeholder="截止日期" th:value="${#dates.format(link.endTime, 'yyyy-MM-dd HH:mm')}" readonly  required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-warning">修改</button>
+        </div>
+    </div>
+</form>
+<script th:src="@{/js/laydate/laydate.js}"></script>
+<script>
+    laydate.render({
+        elem: '#date'
+        ,range: ['#startTime', '#endTime']
+        ,type:'datetime'
+        ,format:"yyyy-MM-dd HH:mm"
+    });
+</script>
+</body>
+</html>

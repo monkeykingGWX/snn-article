@@ -69,14 +69,7 @@ public class AdminUserController {
 
     @GetMapping("/removeSome")
     public String removeSome (String ids) {
-        String[] split = ids.split(",");
-        List<Long> idsList = new ArrayList<>(split.length);
-
-        for (String id : split) {
-            idsList.add(Long.valueOf(id));
-        }
-
-        adminUserService.deleteByIds(idsList);
+        adminUserService.deleteByIds(AdminCommonFunc.ids2List(ids));
         return "success";
     }
 }
