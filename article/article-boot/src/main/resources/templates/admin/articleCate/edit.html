@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/common::common_head(title='文章分类-修改')}"></head>
+<body>
+<form class="form-horizontal" id="form" method="post" th:action="@{/admin/articleCate/edit}">
+    <input type="hidden" name="cateId" th:value="${cate.cateId}">
+    <div class="form-group">
+        <label for="cateName" class="col-sm-2 control-label">作文分类 <span class="red">*</span></label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="cateName" name="cateName" th:value="${cate.cateName}"  required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="orderby" class="col-sm-2 control-label">排序值</label>
+        <div class="col-sm-9">
+            <input type="number" class="form-control" id="orderby" name="orderby" th:value="${cate.orderby}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-warning">修改</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

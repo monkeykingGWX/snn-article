@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/common::common_head(title='作文分类')}"></head>
+<body>
+<div class="row" id="admin">
+    <div class="col-md-2 nav-list" th:replace="~{admin/common::common_nav_list(nav='cate')}"></div>
+    <div class="col-md-10">
+        <div class="main" id="user">
+
+            <div class="btn-act">
+                <a th:href="@{/admin/articleCate/create}" class="btn btn-primary" target="_blank">新增</a>
+                <a th:data-href="@{/admin/articleCate/orderby}" class="btn btn-warning" target="_blank" id="orderList">排序</a>
+                <a th:data-href="@{/admin/articleCate/removeSome}" class="btn btn-danger removeSome" target="_blank">删除</a>
+            </div>
+
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th><input type="checkbox" class="check-all"></th>
+                    <th>作文分类</th>
+                    <th>排序值</th>
+                    <th>操作</th>
+                </tr>
+                <tr th:each="cate:${pageInfo.list}">
+                    <td><input type="checkbox" class="check-del" th:data-id="${cate.cateId}"></td>
+                    <td th:text="${cate.cateName}"></td>
+                    <td><input class="orderby form-control" th:data-primary="${cate.cateId}" type="number" th:value="${cate.orderby}" /></td>
+                    <td>
+                        <a th:href="@{/admin/articleCate/edit/}+${cate.cateId}" target="_blank" class="btn btn-warning btn-xs">修改</a>
+                        <a th:href="@{/admin/articleCate/removeOne/}+${cate.cateId}" target="_blank" class="btn btn-danger btn-xs removeOne">删除</a>
+                    </td>
+                </tr>
+            </table>
+
+            <nav aria-label="Page navigation" id="pagination" th:replace="~{admin/common::pagination(pageInfo=${pageInfo}, baseLink='/admin/articleCate?pageNum=', searchQuery='')}"></nav>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery_3.6.0.min.js}"></script>
+<script th:src="@{/js/admin.js}" ></script>
+</body>
+</html>

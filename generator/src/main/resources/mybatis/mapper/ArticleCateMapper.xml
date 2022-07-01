@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snn.article.dao.ArticleCateMapper">
+  <resultMap id="BaseResultMap" type="com.snn.article.domain.ArticleCate">
+    <id column="cate_id" jdbcType="BIGINT" property="cateId" />
+    <result column="cate_name" jdbcType="VARCHAR" property="cateName" />
+    <result column="orderby" jdbcType="INTEGER" property="orderby" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from article_cate
+    where cate_id = #{cateId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.snn.article.domain.ArticleCate">
+    insert into article_cate (cate_id, cate_name, orderby, 
+      is_delete)
+    values (#{cateId,jdbcType=BIGINT}, #{cateName,jdbcType=VARCHAR}, #{orderby,jdbcType=INTEGER}, 
+      #{isDelete,jdbcType=BIT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.snn.article.domain.ArticleCate">
+    update article_cate
+    set cate_name = #{cateName,jdbcType=VARCHAR},
+      orderby = #{orderby,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=BIT}
+    where cate_id = #{cateId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select cate_id, cate_name, orderby, is_delete
+    from article_cate
+    where cate_id = #{cateId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select cate_id, cate_name, orderby, is_delete
+    from article_cate
+  </select>
+</mapper>

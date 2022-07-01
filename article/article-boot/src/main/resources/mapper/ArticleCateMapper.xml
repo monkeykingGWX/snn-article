@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snn.article.dao.ArticleCateMapper">
+
+  <resultMap id="BaseResultMap" type="com.snn.article.domain.ArticleCate">
+    <id column="cate_id" jdbcType="BIGINT" property="cateId" />
+    <result column="cate_name" jdbcType="VARCHAR" property="cateName" />
+    <result column="orderby" jdbcType="INTEGER" property="orderby" />
+  </resultMap>
+
+  <sql id="columns">
+    select cate_id, cate_name, orderby from article_cate
+  </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update article_cate set is_delete=1
+    where cate_id = #{cateId} and is_delete=0
+  </delete>
+
+  <insert id="insert" parameterType="com.snn.article.domain.ArticleCate">
+    insert into article_cate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cateName != null and cateName != ''">cate_name,</if>
+      <if test="orderby != null ">orderby,</if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cateName != null and cateName != ''">#{cateName},</if>
+      <if test="orderby != null ">#{orderby},</if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.snn.article.domain.ArticleCate">
+    update article_cate
+    <set>
+      <if test="cateName != null and cateName != ''">cate_name=#{cateName},</if>
+      <if test="orderby != null ">orderby=#{orderby},</if>
+    </set>
+    where cate_id = #{cateId} and is_delete=0
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <include refid="columns" />
+    where cate_id = #{cateId} and is_delete=0
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    <include refid="columns" /> where is_delete=0 order by orderby desc
+  </select>
+</mapper>
