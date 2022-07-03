@@ -1,6 +1,8 @@
 package com.snn.article.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.validation.constraints.Max;
@@ -13,6 +15,8 @@ import javax.validation.constraints.Min;
 
 @Data
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Pageination {
 
     // 页码

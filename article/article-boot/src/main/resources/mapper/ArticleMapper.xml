@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snn.article.dao.ArticleMapper">
+
+  <resultMap id="BaseResultMap" type="com.snn.article.domain.Article">
+    <id column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="cate_id" jdbcType="BIGINT" property="cateId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="is_hot" jdbcType="BIT" property="isHot" />
+    <result column="is_favor" jdbcType="BIT" property="isFavor" />
+    <result column="is_sub" jdbcType="BIT" property="isSub" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update article set is_delete=1
+    where article_id = #{articleId}
+  </delete>
+
+  <insert id="insert" parameterType="com.snn.article.domain.Article" useGeneratedKeys="true" keyProperty="articleId">
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cateId != null">cate_id,</if>
+      <if test="title != null and title != ''">title,</if>
+      <if test="keyword != null and keyword != ''">keyword,</if>
+      <if test="isHot != null">is_hot,</if>
+      <if test="isFavor != null">is_favor,</if>
+      <if test="isSub != null">is_sub,</if>
+      <if test="createTime != null">create_time,</if>
+    </trim>
+    <trim prefix="values(" suffix=")" suffixOverrides=",">
+      <if test="cateId != null">#{cateId},</if>
+      <if test="title != null and title != ''">#{title},</if>
+      <if test="keyword != null and keyword != ''">#{keyword},</if>
+      <if test="isHot != null">#{isHot},</if>
+      <if test="isFavor != null">#{isFavor},</if>
+      <if test="isSub != null">#{isSub},</if>
+      <if test="createTime != null">#{createTime},</if>
+    </trim>
+
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.snn.article.domain.Article">
+    update article
+    <set>
+      <if test="cateId != null">cate_id=#{cateId},</if>
+      <if test="title != null and title != ''">title=#{title},</if>
+      <if test="keyword != null and keyword != ''">keyword=#{keyword},</if>
+      <if test="isHot != null">is_hot=#{isHot},</if>
+      <if test="isFavor != null">is_favor=#{isFavor},</if>
+      <if test="isSub != null">is_sub=#{isSub},</if>
+      <if test="createTime != null">create_time=#{createTime},</if>
+    </set>
+    where article_id = #{articleId} and is_delete=0
+  </update>
+  <sql id="columns">
+    select article_id, cate_id, title, keyword, is_hot, is_favor, is_sub, create_time
+    from article
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <include refid="columns" />
+    where article_id = #{articleId} and is_delete=0
+  </select>
+  <select id="selectArticleList" resultMap="BaseResultMap">
+    <include refid="columns" />
+    <where>
+      <if test="title != null and title != ''">and title like concat(#{title}, '%')</if>
+      <if test="cateId != null">and cate_id=#{cateId}</if>
+      <if test="isHot != null">and is_hot=#{isHot}</if>
+      <if test="isFavor != null">and is_favor=#{isFavor}</if>
+      <if test="isSub != null">and is_sub=#{isSub}</if>
+      and is_delete=0
+    </where>
+    order by article_id DESC
+  </select>
+</mapper>

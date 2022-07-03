@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snn.article.dao.ArticleContentMapper">
+  <resultMap id="BaseResultMap" type="com.snn.article.domain.ArticleContent">
+    <result column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <insert id="insert" parameterType="com.snn.article.domain.ArticleContent">
+    insert into article_content (article_id, content)
+    values (#{articleId,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select article_id, content
+    from article_content
+  </select>
+</mapper>

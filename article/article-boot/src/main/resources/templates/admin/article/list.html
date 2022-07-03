@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/common::common_head(title='文章管理')}"></head>
+<body>
+<div class="row" id="admin">
+    <div class="col-md-2 nav-list" th:replace="~{admin/common::common_nav_list(nav='article')}"></div>
+    <div class="col-md-10">
+        <div class="main" id="user">
+            <form id="form-search" class="form-inline" th:action="@{/admin/article}" method="post">
+                <div class="form-group">
+                    <label for="cateId">文章分类</label>
+                    <select class="form-control" id="cateId" name="cateId">
+                        <option value="">不限</option>
+                        <option th:each="cate:${cateList}" th:value="${cate.cateId}" th:selected="${search.cateId==cate.cateId}" th:text="${cate.cateName}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="title">文章标题</label>
+                    <input type="text" class="form-control" id="title" name="title" th:value="${search.title} ? ${search.title}" placeholder="输入文章标题">
+                </div>
+                <div class="form-group">
+                    <label for="isHot">是否热门</label>
+                    <select class="form-control" id="isHot" name="isHot">
+                        <option value="">不限</option>
+                        <option value="1" th:selected="${search.isHot==1}">是</option>
+                        <option value="0" th:selected="${search.isHot==0}">否</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="isFavor">是否推荐</label>
+                    <select class="form-control" id="isFavor" name="isFavor">
+                        <option value="">不限</option>
+                        <option value="1" th:selected="${search.isFavor==1}">是</option>
+                        <option value="0" th:selected="${search.isFavor==0}">否</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="isSub">是否专题</label>
+                    <select class="form-control" id="isSub" name="isSub">
+                        <option value="">不限</option>
+                        <option value="1" th:selected="${search.isSub==1}">是</option>
+                        <option value="0" th:selected="${search.isSub==0}">否</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success">搜索</button>
+            </form>
+            <div class="btn-act">
+                <a th:href="@{/admin/article/create}" class="btn btn-primary" target="_blank">新增</a>
+                <a th:data-href="@{/admin/article/removeSome}" class="btn btn-danger removeSome" target="_blank">删除</a>
+            </div>
+
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th><input type="checkbox" class="check-all"></th>
+                    <th>文章分类</th>
+                    <th>文章标题</th>
+                    <th>是否热门</th>
+                    <th>是否推荐</th>
+                    <th>是否专题</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr th:each="article:${pageInfo.list}">
+                    <td><input type="checkbox" class="check-del" th:data-id="${article.articleId}"></td>
+                    <td th:text="${cateMap[article.cateId].cateName}"></td>
+                    <td th:text="${article.title}"></td>
+                    <td th:text="${article.isHot==1} ? '是' : '否'"></td>
+                    <td th:text="${article.isFavor==1} ? '是' : '否'"></td>
+                    <td th:text="${article.isSub==1} ? '是' : '否'"></td>
+                    <td th:text="${#dates.format(article.createTime, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td>
+                        <a th:href="@{/admin/article/edit/}+${article.articleId}" target="_blank" class="btn btn-warning btn-xs">修改</a>
+                        <a th:href="@{/admin/article/removeOne/}+${article.articleId}" target="_blank" class="btn btn-danger btn-xs removeOne">删除</a>
+                    </td>
+                </tr>
+            </table>
+
+            <nav
+                    aria-label="Page navigation"
+                    id="pagination"
+                    th:replace="~{admin/common::pagination(pageInfo=${pageInfo},
+                     baseLink='/admin/article?pageNum=',
+                     searchQuery=${searchQuery})}"></nav>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery_3.6.0.min.js}"></script>
+<script th:src="@{/js/admin.js}" ></script>
+</body>
+</html>

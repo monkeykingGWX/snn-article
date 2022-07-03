@@ -16,7 +16,7 @@
         <li><a th:href="@{/admin}" th:class="${nav == 'admin'} ? 'active' : ''">首页</a></li>
         <li><a th:href="@{/admin/user}" th:class="${nav == 'adminUser'} ? 'active' : ''">管理员</a></li>
         <li><a th:href="@{/admin/articleCate}" th:class="${nav == 'cate'} ? 'active' : ''">文章分类</a></li>
-        <li><a href="">文章管理</a></li>
+        <li><a th:href="@{/admin/article}" th:class="${nav == 'article'} ? 'active' : ''">文章管理</a></li>
         <li><a th:href="@{/admin/webinfo}" th:class="${nav == 'webinfo'} ? 'active' : ''">站点信息</a></li>
         <li><a th:href="@{/admin/friend}" th:class="${nav == 'friend'} ? 'active' : ''">友情链接</a></li>
     </ul>

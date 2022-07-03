@@ -27,6 +27,7 @@ html,body,#admin {
 #form-search{margin-bottom:20px;}
 #form-search .form-control{margin-right:5px}
 .orderby{width:60px;padding:2px 3px;height: 20px;}
+.wangEdit-textarea{position: absolute;left:-9999px;}
 
 #pagination{
     text-align: center;

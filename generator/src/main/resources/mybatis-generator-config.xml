@@ -30,6 +30,7 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!--<table tableName="web_info"></table>-->
-        <table tableName="article_cate"></table>
+        <table tableName="article"></table>
+        <table tableName="article_content"></table>
     </context>
 </generatorConfiguration>

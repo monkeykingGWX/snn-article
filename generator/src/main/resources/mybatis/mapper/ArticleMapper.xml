@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snn.article.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.snn.article.domain.Article">
+    <id column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="cate_id" jdbcType="BIGINT" property="cateId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="is_hot" jdbcType="BIT" property="isHot" />
+    <result column="is_favor" jdbcType="BIT" property="isFavor" />
+    <result column="is_sub" jdbcType="BIT" property="isSub" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from article
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.snn.article.domain.Article">
+    insert into article (article_id, cate_id, title, 
+      keyword, is_hot, is_favor, is_sub, 
+      create_time, is_delete)
+    values (#{articleId,jdbcType=BIGINT}, #{cateId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{isHot,jdbcType=BIT}, #{isFavor,jdbcType=BIT}, #{isSub,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BIT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.snn.article.domain.Article">
+    update article
+    set cate_id = #{cateId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      is_hot = #{isHot,jdbcType=BIT},
+      is_favor = #{isFavor,jdbcType=BIT},
+      is_sub = #{isSub,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=BIT}
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select article_id, cate_id, title, keyword, is_hot, is_favor, is_sub, create_time, 
+    is_delete
+    from article
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select article_id, cate_id, title, keyword, is_hot, is_favor, is_sub, create_time, 
+    is_delete
+    from article
+  </select>
+</mapper>
