@@ -1,40 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="applicable-device" content="mobile">
-<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
-<meta content="yes" name="apple-mobile-web-app-capable" />
-<meta content="black" name="apple-mobile-web-app-status-bar-style"  />
-<meta content="telephone=no" name="format-detection" />
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<title th:text="${webInfo.title}">小学生作文大全|小学生作文400字</title>
-<meta name="keywords" th:content="${webInfo.keyword}">
-<meta name="description" th:content="${webInfo.description}">
-
-<link rel="stylesheet" href="css/m.css" />
-
-<script src="js/jquery-1.9.1.min.js"></script>
-<script src="js/touchslide.1.1.js"></script>
-
+<head th:replace="~{common::common_head(title=${webInfo.title}, keyword=${webInfo.keyword}, description=${webInfo.description})}">
 </head>
 <body>
 <div id="nav-over"></div>
 <div id="warmp" class="warmp">
-	<header class="header">
-		<section class="fix navbar">
-			<a class="ico-home" th:href="@{/}"><span>小学生作文大全</span></a>
-			<h1 id="title" th:text="${webInfo.title}">作文大全</h1>
-			<span class="ico-nav navHome">[[${webInfo.title}]]网导航</span>
-		</section>
-	</header>
-	<div class="fix search">
-		<form name="f2" th:action="@{/list/search.html}">
-		<input type="text" value="" placeholder="请输入关键词..." name="keywords" class="keywords">
-		<button type="submit" value="" class="go"></button>
-		</form>
-	</div>
+	<header class="header" th:replace="~{common::common_header(title=${webInfo.title})}"></header>
+	<div class="fix search" th:replace="~{common::common_search(url=@{/list/search.html})}"></div>
 	
     <div id="zizhi" class="fix honner-focus"></div>
 
@@ -112,28 +84,9 @@
     <div class="copyright">
         <p>友情链接： <a th:each="link:${friendLinks}" class="friend-link" th:href="${link.link}" th:text="${link.name}">读后感</a> </p>
     </div>
-    <div class="copyright" id="copyright-bottom">
-        <input type="hidden" id="bottom" th:value="${bottom}" />
-        <p>Copyright &copy; m.baidu.com <a href="#">小学生作文大全</a>手机版</p>
-    </div>
-</div>
-<!-- 下拉导航菜单 -->
-<nav id="nav" class="nav home">
-<h3><a href="/">[[${webInfo.title}]]网</a></h3>
-    <div id="scrollerBox" class="scrollerBox">
-        <div class="scroller">
-            <ul>
-                <li th:each="nav:${navs}"><a th:href="@{/list/}+${nav.cateId}+'.html'" th:text="${nav.cateName}">三年级作文</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<!-- 下拉导航菜单END -->
 
-<script src="js/index.js"></script>
-<script>
-    var bottom = $("#bottom").val();
-    $("#copyright-bottom").html(bottom);
-</script>
+    <div class="copyright" id="copyright-bottom" th:replace="~{common::common_copyright(bottom=${bottom})}"></div>
+</div>
+<div id="mybottom" th:replace="~{common::common_bottom(navs=${navs}, title=${webInfo.title})}"></div>
 </body>
 </html>

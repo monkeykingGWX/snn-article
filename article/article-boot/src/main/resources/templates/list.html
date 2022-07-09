@@ -1,199 +1,67 @@
 <!DOCTYPE html>
-<html>
-<!---->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<meta name="applicable-device" content="mobile">
-<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
-<meta content="yes" name="apple-mobile-web-app-capable" />
-<meta content="black" name="apple-mobile-web-app-status-bar-style"  />
-<meta content="telephone=no" name="format-detection" />
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<title>ÈýÄê¼¶×÷ÎÄ´óÈ«_Ð¡Ñ§ÈýÄê¼¶×÷ÎÄÌâÄ¿´óÈ«_Ð¡Ñ§Éú×÷ÎÄÍø</title>
-<meta name="keywords" content="ÈýÄê¼¶×÷ÎÄ,ÈýÄê¼¶×÷ÎÄÌâÄ¿,ÈýÄê¼¶×÷ÎÄ´óÈ«">
-<link rel="stylesheet" href="css/m.css" />
-<script src="js/jquery-1.9.1.min.js"></script>
-<script src="js/touchslide.1.1.js"></script>
-<base target="_self" />
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common::common_head(title=${webInfo.title}, keyword=${webInfo.keyword}, description=${webInfo.description})}">
+
 
 <body>
 <div id="nav-over"></div>
 <div id="warmp" class="warmp">
-	<header class="header">
-		<section class="fix navbar">
-			<a class="ico-home" href="index.html"><span>Ð¡Ñ§Éú×÷ÎÄ´óÈ«</span></a>
-			<h1 id="title">×÷ÎÄ´óÈ«</h1>
-			<span class="ico-nav navHome">×÷ÎÄ´óÈ«Íøµ¼º½</span>
-		</section>
-	</header>
-
-	<div class="fix search">
-		<form name="f2" action="#">
-		<input type="hidden" value="11218189099946564168" name="s">
-		<input type="text" value="" placeholder="ÇëÊäÈë¹Ø¼ü´Ê..." name="q" class="keywords">
-		<button type="submit" value="" class="go"></button></form>
-	</div>
+    <header class="header" th:replace="~{common::common_header(title=${webInfo.title})}"></header>
+    <div class="fix search" th:replace="~{common::common_search(url=@{/list/} + ${cate.cateId} + '.html')}"></div>
 	
-	<div class="dh"><a href="index.html">Ê×Ò³</a> > <a href="#">ÈýÄê¼¶×÷ÎÄ´óÈ«</a> > À¸Ä¿ÁÐ±í£º</div>
+	<div class="dh"><a th:href="@{/}">é¦–é¡µ</a> > <a href="" th:text="${cate.cateName} + 'ä½œæ–‡å¤§å…¨'">ä¸‰å¹´çº§ä½œæ–‡å¤§å…¨</a> > æ ç›®åˆ—è¡¨ï¼š</div>
 	<div class="list-index">
-<ul class=articlelist>
-<!--
--->
+        <ul class=articlelist>
+            <li th:each="item:${list}"><a th:href="@{/detail/}+${item.articleId} + '.html'" th:text="${item.title}">å¦ˆå¦ˆæ‰¾èŒèšª300å­—</a></li>
+        </ul>
+    </div>
 
-<li><a href="detail.html">ÂèÂèÕÒòòò½300×Ö</a></li>
+    <div class="showpage"><a href="#" title="ä¸Šä¸€é¡µ">ä¸Šä¸€é¡µ</a>   <a href='#'><font color=red>1</font></a> <a href="#" title="ç¬¬2é¡µ">2</a> <a href="#" title="ç¬¬3é¡µ">3</a> <a href="#" title="ç¬¬4é¡µ">4</a>  <a href="#" title="ä¸‹ä¸€é¡µ">ä¸‹ä¸€é¡µ</a></div>
 
-<!---->
 
-<li><a href="detail.html">ÀÏÍâ700×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">¹Û²ìÃ«¶¹300×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">·ÉÖ½·É»ú600×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">Ñà³¤300×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">¹ä¹«Ô°400×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">°ü°ü×Ó300×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">ËÄ¼¾100×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">ÀÖÔÚÆïÖÐ400×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">ÐÂÑ§ÆÚ´òËã300×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">Í¯ÄêÈ¤ÊÂ900×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">¹ºÄê»õ200×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">Í¯ÄêÈ¤ÊÂ300×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">Ä¸Ç×½Ú300×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">ÃÀÀöµÄÐ£Ô°400×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">ÇïÌìµÄÄÏ´óÐ£Ô°500×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">½ÌÄãÑ§Ò»ÕÐ400×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">Ð¡ÇøµÄÔç³¿300×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">Ë®¹ûÄ§·¨Ê¦250×Ö</a></li>
-
-<!---->
-
-<li><a href="detail.html">ÃÀÀöµÄ¼ÒÏç400×Ö</a></li>
-
-<!---->
-</ul></div>
-<div class="showpage"><a href="#" title="ÉÏÒ»Ò³">ÉÏÒ»Ò³</a>   <a href='#'><font color=red>1</font></a> <a href="#" title="µÚ2Ò³">2</a> <a href="#" title="µÚ3Ò³">3</a> <a href="#" title="µÚ4Ò³">4</a>  <a href="#" title="ÏÂÒ»Ò³">ÏÂÒ»Ò³</a></div>
-
-<div class="tab-xinqing" id="tab-xinqing">
+    <div class="tab-xinqing" id="tab-xinqing">
       <div class="tab-xinqing-hd tab-hd-index">
         <ul class="fix">
-            <li class="on">×îÐÂÎÄÕÂ</li>
-            <li>ÈÈÃÅ·¶ÎÄ</li>
-            <li>ÍÆ¼ö×÷ÎÄ</li>
+            <li class="on">æœ€æ–°æ–‡ç« </li>
+            <li>çƒ­é—¨èŒƒæ–‡</li>
+            <li>æŽ¨èä½œæ–‡</li>
         </ul>
       </div>
       <div class="tab-xinqing-con">
         <div class="con list-index">
             <ul>
-		<li><a href="detail.html">¿ªÑ§ÁË200×Ö</a></li><li><a href="detail.html">¿ªÑ§µÄµÚÒ»Ìì300×Ö</a></li><li><a href="detail.html">¼ÙÈçÎÒ»á±ä400×Ö</a></li><li><a href="detail.html">´ºÌìÀ´ÁË200×Ö</a></li><li><a href="detail.html">´ºÌìÀ´ÁË300×Ö</a></li><li><a href="detail.html">ÇïÌìµÄ¾°É«200×Ö</a></li>
+		<li><a href="detail.html">å¼€å­¦äº†200å­—</a></li><li><a href="detail.html">å¼€å­¦çš„ç¬¬ä¸€å¤©300å­—</a></li><li><a href="detail.html">å‡å¦‚æˆ‘ä¼šå˜400å­—</a></li><li><a href="detail.html">æ˜¥å¤©æ¥äº†200å­—</a></li><li><a href="detail.html">æ˜¥å¤©æ¥äº†300å­—</a></li><li><a href="detail.html">ç§‹å¤©çš„æ™¯è‰²200å­—</a></li>
             </ul>
         </div>
         <div class="con list-index">
             <ul>
-		<li><a href="detail.html">ÃÀÀöµÄÐ£Ô°400×Ö</a></li><li><a href="detail.html">ÏÄÌìÀ´ÁË400×Ö</a></li><li><a href="detail.html">½ÌÄãÑ§Ò»ÕÐ400×Ö</a></li><li><a href="detail.html">¿´ÂèÂè·¬ÇÑ³´¼¦µ°400×Ö</a></li><li><a href="detail.html">´¢ÐîµÄºÃ´¦300×Ö</a></li><li><a href="detail.html">ÎÒÑÛÖÐµÄÏÄÌì300×Ö</a></li>
+		<li><a href="detail.html">ç¾Žä¸½çš„æ ¡å›­400å­—</a></li><li><a href="detail.html">å¤å¤©æ¥äº†400å­—</a></li><li><a href="detail.html">æ•™ä½ å­¦ä¸€æ‹›400å­—</a></li><li><a href="detail.html">çœ‹å¦ˆå¦ˆç•ªèŒ„ç‚’é¸¡è›‹400å­—</a></li><li><a href="detail.html">å‚¨è“„çš„å¥½å¤„300å­—</a></li><li><a href="detail.html">æˆ‘çœ¼ä¸­çš„å¤å¤©300å­—</a></li>
             </ul>
         </div>
         <div class="con list-index active">
             <ul>
-		<li><a href="detail.html">ÎÒµÄº£ÑóÉú»î</a></li><li><a href="detail.html">¸øÂèÂèµÄÒ»·âÐÅ</a></li><li><a href="detail.html">ÃÀÀöµÄÇïÌì×÷ÎÄ</a></li><li><a href="detail.html">ÎÒµÄºÃ°Ö°Ö</a></li><li><a href="detail.html">ÎÒµÄÍ¬×À</a></li><li><a href="detail.html">¶Á¡¶Â³±õÑ·Æ¯Á÷¼Ç¡·ÓÐ¸Ð</a></li>
+		<li><a href="detail.html">æˆ‘çš„æµ·æ´‹ç”Ÿæ´»</a></li><li><a href="detail.html">ç»™å¦ˆå¦ˆçš„ä¸€å°ä¿¡</a></li><li><a href="detail.html">ç¾Žä¸½çš„ç§‹å¤©ä½œæ–‡</a></li><li><a href="detail.html">æˆ‘çš„å¥½çˆ¸çˆ¸</a></li><li><a href="detail.html">æˆ‘çš„åŒæ¡Œ</a></li><li><a href="detail.html">è¯»ã€Šé²æ»¨é€Šæ¼‚æµè®°ã€‹æœ‰æ„Ÿ</a></li>
             </ul>
         </div>
       </div>
    </div>
 
-<div class="bg about list-pic-index">
-<ul class="fix">
-    <li><a href="list.html">×÷ÎÄ100×Ö</a></li>
-    <li><a href="list.html">×÷ÎÄ200×Ö</a></li>
-    <li><a href="list.html">×÷ÎÄ300×Ö</a></li>
-    <li><a href="list.html">×÷ÎÄ400×Ö</a></li>
-    <li><a href="list.html">×÷ÎÄ500×Ö</a></li>
-    <li><a href="list.html">×÷ÎÄ600×Ö</a></li>
-    <li><a href="list.html">×÷ÎÄËØ²Ä</a></li>
-    <li><a href="list.html">×÷ÎÄÌâÄ¿</a></li>
-</ul>
-</div>
-
-<div class="copyright">
-	<p>Copyright &copy; www.html5code.net <a href="#">Ð¡Ñ§Éú×÷ÎÄ´óÈ«</a>ÊÖ»ú°æ <a href="#">ÈýÄê¼¶×÷ÎÄ´óÈ«</a></p>
-</div>
-</div>
-<!-- ÏÂÀ­µ¼º½²Ëµ¥ -->
-<nav id="nav" class="nav home">
-<h3><a href="/">×÷ÎÄ´óÈ«Íø</a></h3>	
-    <div id="scrollerBox" class="scrollerBox">
-        <div class="scroller">
-            <ul>
-                <li><a href="list.html">ÈýÄê¼¶×÷ÎÄ</a></li>
-                <li><a href="list.html">ËÄÄê¼¶×÷ÎÄ</a></li>
-                <li><a href="list.html">ÎåÄê¼¶×÷ÎÄ</a></li>
-                <li><a href="list.html">ÁùÄê¼¶×÷ÎÄ</a></li>
-                <li><a href="list.html">×÷ÎÄ100×Ö</a></li>
-                <li><a href="list.html">×÷ÎÄ200×Ö</a></li>
-                <li><a href="list.html">×÷ÎÄ300×Ö</a></li>
-                <li><a href="list.html">×÷ÎÄ400×Ö</a></li>
-                <li><a href="list.html">×÷ÎÄ500×Ö</a></li>
-                <li><a href="list.html">×÷ÎÄ600×Ö</a></li>
-                <li><a href="list.html">×÷ÎÄËØ²Ä</a></li>
-                <li><a href="list.html">×÷ÎÄÌâÄ¿</a></li>
-                <li><a href="list.html">×÷ÎÄ·¶ÎÄ</a></li>
-            </ul>
-        </div>
+    <div class="bg about list-pic-index">
+        <ul class="fix">
+            <li><a href="list.html">ä½œæ–‡100å­—</a></li>
+            <li><a href="list.html">ä½œæ–‡200å­—</a></li>
+            <li><a href="list.html">ä½œæ–‡300å­—</a></li>
+            <li><a href="list.html">ä½œæ–‡400å­—</a></li>
+            <li><a href="list.html">ä½œæ–‡500å­—</a></li>
+            <li><a href="list.html">ä½œæ–‡600å­—</a></li>
+            <li><a href="list.html">ä½œæ–‡ç´ æ</a></li>
+            <li><a href="list.html">ä½œæ–‡é¢˜ç›®</a></li>
+        </ul>
     </div>
-</nav>
-<!-- ÏÂÀ­µ¼º½²Ëµ¥END -->
 
-<script src="js/index.js"></script>
+    <div class="copyright" id="copyright-bottom" th:replace="~{common::common_copyright(bottom=${bottom})}"></div>
+</div>
+<div id="mybottom" th:replace="~{common::common_bottom(navs=${navs}, title=${webInfo.title})}"></div>
 
 </body>
 </html>

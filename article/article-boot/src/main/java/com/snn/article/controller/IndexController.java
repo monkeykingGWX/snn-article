@@ -9,6 +9,8 @@ import com.snn.article.service.IWebInfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -36,20 +38,11 @@ public class IndexController {
 
     @GetMapping({"/", "/index.html"})
     public String index (ModelMap modelMap) {
-        /* webInfo */
-        WebInfo webInfo = webInfoService.selectWebInfo();
-        // bottom做下处理
-        String bottom = webInfo.getBottom().replace("\n", "<br />");
-        modelMap.put("webInfo", webInfo);
-        modelMap.put("bottom", bottom);
+        setCommonData(modelMap);
 
         /* 友情链接 */
         List<FriendLink> friendLinks = friendLinkService.selectShowLinks();
         modelMap.put("friendLinks", friendLinks);
-
-        /* 导航栏 */
-        List<ArticleCate> articleCates = articleCateService.selectAllCate();
-        modelMap.put("navs", articleCates);
 
         /* 最新、最热、推荐各6篇 */
         Pageination pageination = new Pageination(1, 6);
@@ -92,5 +85,40 @@ public class IndexController {
         modelMap.put("cateList32", cateList32);
 
         return "index";
+    }
+
+    @GetMapping("/list/{cateId}.html")
+    public String list (@PathVariable Long cateId, Pageination pageination, @RequestParam(defaultValue = "") String keywords, ModelMap mmap) {
+        setCommonData(mmap);
+        ArticleCate articleCate = articleCateService.selectOneByPrimary(cateId);
+        mmap.put("cate", articleCate);
+
+        // 获取文章列表
+        Article article = new Article();
+        article.setCateId(cateId);
+        article.setTitle(keywords);
+        PageInfo<Article> articlePageInfo = articleService.selectList(pageination, article);
+        mmap.put("list", articlePageInfo.getList());
+        return "list";
+    }
+
+    @GetMapping("/detail/{articleId}.html")
+    public String detail (@PathVariable Long articleId, ModelMap modelMap) {
+        return "detail";
+    }
+
+
+    // 设置数据
+    private void setCommonData (ModelMap modelMap) {
+        /* webInfo */
+        WebInfo webInfo = webInfoService.selectWebInfo();
+        // bottom做下处理
+        String bottom = webInfo.getBottom().replace("\n", "<br />");
+        modelMap.put("webInfo", webInfo);
+        modelMap.put("bottom", bottom);
+
+        /* 导航栏 */
+        List<ArticleCate> articleCates = articleCateService.selectAllCate();
+        modelMap.put("navs", articleCates);
     }
 }
