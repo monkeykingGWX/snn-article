@@ -15,4 +15,5 @@ public interface FriendLinkMapper {
 
     int updateByPrimaryKey(FriendLink record);
 
+    List<FriendLink> selectShowLinks ();
 }

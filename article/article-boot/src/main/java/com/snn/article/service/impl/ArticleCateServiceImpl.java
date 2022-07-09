@@ -88,4 +88,14 @@ public class ArticleCateServiceImpl implements IArticleCateService {
 
         return 1;
     }
+
+    @Override
+    public List<ArticleCate> selectAllCate() {
+        return articleCateMapper.selectAll();
+    }
+
+    @Override
+    public List<ArticleCate> selectSixCates() {
+        return articleCateMapper.selectSixCates();
+    }
 }

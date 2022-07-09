@@ -85,4 +85,9 @@ public class FriendLinkServiceImpl implements IFriendLinkService {
 
         return 1;
     }
+
+    @Override
+    public List<FriendLink> selectShowLinks() {
+        return friendLinkMapper.selectShowLinks();
+    }
 }

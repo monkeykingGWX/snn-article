@@ -20,4 +20,5 @@ public interface IFriendLinkService {
     PageInfo<FriendLink> selectList (Pageination pageination, FriendLink friendLink);
     FriendLink selectByPrimaryId (Long linkId);
     int updateOrder (List<OrderNum> orderNums);
+    List<FriendLink> selectShowLinks ();
 }

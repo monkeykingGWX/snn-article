@@ -43,7 +43,12 @@
     <include refid="columns" />
     where cate_id = #{cateId} and is_delete=0
   </select>
+
   <select id="selectAll" resultMap="BaseResultMap">
     <include refid="columns" /> where is_delete=0 order by orderby desc
+  </select>
+
+  <select id="selectSixCates" resultMap="BaseResultMap">
+    <include refid="columns" /> where is_delete=0 order by orderby desc limit 6
   </select>
 </mapper>

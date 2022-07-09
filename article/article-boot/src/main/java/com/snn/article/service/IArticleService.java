@@ -21,4 +21,5 @@ public interface IArticleService {
     PageInfo<Article> selectList(Pageination pageination, Article article);
     Article selectByPrimaryId(Long articleId);
     int updateOrder(List<OrderNum> orderNums);
+    List<Article> selectSixArticleByTag(String tagName);
 }

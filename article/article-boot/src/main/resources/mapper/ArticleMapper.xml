@@ -74,4 +74,9 @@
     </where>
     order by article_id DESC
   </select>
+
+  <select id="selectSixArticleByTag" parameterType="String" resultMap="BaseResultMap">
+    <include refid="columns" />
+    where ${tagName} = 1 ORDER BY ${tagName} DESC,create_time desc LIMIT 6
+  </select>
 </mapper>

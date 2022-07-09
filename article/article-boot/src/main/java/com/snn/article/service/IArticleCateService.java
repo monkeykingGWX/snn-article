@@ -4,7 +4,6 @@ import com.github.pagehelper.PageInfo;
 import com.snn.article.domain.ArticleCate;
 import com.snn.article.domain.OrderNum;
 import com.snn.article.domain.Pageination;
-import javafx.scene.control.Pagination;
 
 import java.util.List;
 
@@ -24,4 +23,6 @@ public interface IArticleCateService {
     int removeSome (List<Long> cateIds);
     PageInfo<ArticleCate> selectList(Pageination pageination);
     int updateOrder (List<OrderNum> orderNums);
+    List<ArticleCate> selectAllCate ();
+    List<ArticleCate> selectSixCates ();
 }

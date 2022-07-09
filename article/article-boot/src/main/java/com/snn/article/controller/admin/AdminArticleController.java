@@ -40,10 +40,8 @@ public class AdminArticleController {
         PageInfo<Article> pageInfo = articleService.selectList(pageination, article);
         String searchQuery = HttpQueryUtils.object2QueryStr(article);
 
-        // 获取作文分类
-        Pageination tmp = new Pageination(1, 99999);
-        PageInfo<ArticleCate> tmpPageInfo = articleCateService.selectList(tmp);
-        List<ArticleCate> cateList = tmpPageInfo.getList();
+        // 获取所有分类
+        List<ArticleCate> cateList = articleCateService.selectAllCate();
         Map<Long, ArticleCate> cateMap = AdminCommonFunc.list2MapByPrimary(cateList, "cateId");
 
         mmap.put("pageInfo", pageInfo);
@@ -57,9 +55,7 @@ public class AdminArticleController {
 
     @GetMapping("/create")
     public String addPage (ModelMap mmap) {
-        Pageination pageination = new Pageination(1, 99999);
-        PageInfo<ArticleCate> pageInfo = articleCateService.selectList(pageination);
-        mmap.put("cateList",  pageInfo.getList());
+        mmap.put("cateList",  articleCateService.selectAllCate());
         return "admin/article/add";
     }
 
@@ -86,10 +82,8 @@ public class AdminArticleController {
     public String editPage (@PathVariable Long articleId, ModelMap mmap) {
         Article article = articleService.selectByPrimaryId(articleId);
 
-        Pageination pageination = new Pageination(1, 99999);
-        PageInfo<ArticleCate> pageInfo = articleCateService.selectList(pageination);
         mmap.put("article", article);
-        mmap.put("cateList", pageInfo.getList());
+        mmap.put("cateList", articleCateService.selectAllCate());
         return "admin/article/edit";
     }
 

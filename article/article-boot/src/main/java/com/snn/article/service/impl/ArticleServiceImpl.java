@@ -4,16 +4,17 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.snn.article.dao.ArticleContentMapper;
 import com.snn.article.dao.ArticleMapper;
-import com.snn.article.domain.*;
+import com.snn.article.domain.Article;
+import com.snn.article.domain.ArticleContent;
+import com.snn.article.domain.OrderNum;
+import com.snn.article.domain.Pageination;
 import com.snn.article.service.IArticleService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.validation.constraints.NotBlank;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author monkeykingGWX
@@ -101,5 +102,18 @@ public class ArticleServiceImpl implements IArticleService {
     @Override
     public int updateOrder(List<OrderNum> orderNums) {
         return 0;
+    }
+
+    @Override
+    public List<Article> selectSixArticleByTag(String tagName) {
+        Set<String> tagSet = new HashSet<>(3);
+        tagSet.add("is_hot");
+        tagSet.add("is_sub");
+        tagSet.add("is_favor");
+
+        if (!tagSet.contains(tagName)) {
+            return new ArrayList<>();
+        }
+        return articleMapper.selectSixArticleByTag(tagName);
     }
 }

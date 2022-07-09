@@ -61,4 +61,9 @@
     </where>
     order by orderby desc
   </select>
+  <select id="selectShowLinks" resultMap="BaseResultMap">
+    select link_id, `name`, link, orderby, is_show, start_time, end_time
+    from friend_link where is_show=1 and CURRENT_TIMESTAMP > start_time and end_time > CURRENT_TIMESTAMP
+    order by orderby desc
+  </select>
 </mapper>

@@ -14,4 +14,6 @@ public interface ArticleCateMapper {
     List<ArticleCate> selectAll();
 
     int updateByPrimaryKey(ArticleCate record);
+
+    List<ArticleCate> selectSixCates ();
 }

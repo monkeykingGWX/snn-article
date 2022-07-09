@@ -14,4 +14,7 @@ public interface ArticleMapper {
     List<Article> selectArticleList(Article article);
 
     int updateByPrimaryKey(Article record);
+
+    // 查询6篇 最新/最热/推荐 作文
+    List<Article> selectSixArticleByTag (String tagName);
 }
